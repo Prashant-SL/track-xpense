@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./router";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <h1 className="text-3xl font-bold underline border-2">Hello world!</h1>
+    <BrowserRouter>
+      <div className="w-max h-max overflow-scroll no-scrollbar scroll-smooth mt-2 border-2 mx-auto">
+        <Router />
+      </div>
+    </BrowserRouter>
   </React.StrictMode>
 );
