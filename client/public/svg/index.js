@@ -15,9 +15,11 @@ import OtherSVG from "./other.svg";
 import PhoneSVG from "./phone.svg";
 import SalarySVG from "./salary.svg";
 import TravelSVG from "./travel.svg";
+import CurrencySVG from "./currency.svg";
 
 export {
   BillsSVG,
+  CurrencySVG,
   EducationSVG,
   EntertainmentSVG,
   FoodSVG,

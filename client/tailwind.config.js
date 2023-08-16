@@ -5,6 +5,7 @@ export default {
     extend: {
       width: {
         max: "375px",
+        "95p": "95%",
       },
       height: {
         max: "844px",
@@ -25,7 +26,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Graphik", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
         serif: ["Merriweather", "serif"],
       },
     },
