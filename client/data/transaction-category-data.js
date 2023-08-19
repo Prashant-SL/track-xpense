@@ -16,7 +16,7 @@ import {
   ComputerSVG,
   SalarySVG,
   BusinessSVG,
-} from "../../public/svg/index";
+} from "../src/svg/index";
 
 const incomeCategory = [
   {

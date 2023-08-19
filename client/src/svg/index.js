@@ -16,6 +16,9 @@ import PhoneSVG from "./phone.svg";
 import SalarySVG from "./salary.svg";
 import TravelSVG from "./travel.svg";
 import CurrencySVG from "./currency.svg";
+import UpArrowSVG from "./upArrow.svg";
+import DownArrowSVG from "./downArrow.svg";
+import LoginPageIcon from "./loginPageIcon.svg";
 
 export {
   BillsSVG,
@@ -36,4 +39,7 @@ export {
   ComputerSVG,
   SalarySVG,
   BusinessSVG,
+  UpArrowSVG,
+  DownArrowSVG,
+  LoginPageIcon,
 };
