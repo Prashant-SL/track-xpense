@@ -4,6 +4,7 @@ import { Outlet } from "react-router";
 const AddTransaction = () => {
   return (
     <div>
+      add transaction
       <Outlet />
     </div>
   );

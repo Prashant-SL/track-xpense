@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       width: {
@@ -24,6 +28,9 @@ export default {
           900: "#260d73",
           950: "#14054a",
         },
+      },
+      borderRadius: {
+        50: "50%",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
