@@ -39,7 +39,7 @@ function Menubar() {
 
 
     return (
-    <div className="flex gap-20" style={{position: 'absolute', bottom: 0, margin: '0px 0px 0px 5px'}}>
+    <div className="flex gap-20" style={{position: 'absolute', bottom: 0, margin: '0px 0px 0px 0px'}}>
         <img className={homeTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleHome} src='../../public/Icons/home.png'></img>
         <img className={signalTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleSignal} src='../../public/Icons/signal.png'></img>
         <img className={walletTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleWallet} src='../../public/Icons/wallet.png'></img>
