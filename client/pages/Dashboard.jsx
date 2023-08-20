@@ -1,4 +1,5 @@
 import React from "react";
+import Menubar from "../src/components/Menubar";
 import TransactionButton from "../src/components/transaction/TransactionButton";
 import TransactionGraph from "../src/components/transaction/TransactionGraph";
 import TransactionList from "../src/components/transaction/TransactionList";
@@ -40,7 +41,9 @@ const Dashboard = () => {
           </button>
         </div>
         <TransactionList />
+        <TransactionList /><TransactionList /><TransactionList /><TransactionList /><TransactionList /><TransactionList /><TransactionList /><TransactionList /><TransactionList />
       </>
+      <Menubar />
     </div>
   );
 };

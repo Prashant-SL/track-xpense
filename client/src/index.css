@@ -19,15 +19,14 @@
       }
 
       .menuIconSize{
-        height: 30px;
-        width: 30px;
-        margin: 10px auto auto auto;
+        height: 50px;
+        /* width: 25%; */
+        padding: 10px;
       }
 
       .activeTab{
-        /* color: red;   */
-        background-color: #dcaf69;
-        border-radius: 10%; 
+        background-color: white;
+        border-radius: 10%;
       }
     }
   }

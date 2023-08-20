@@ -19,6 +19,9 @@ import CurrencySVG from "./currency.svg";
 import UpArrowSVG from "./upArrow.svg";
 import DownArrowSVG from "./downArrow.svg";
 import LoginPageIcon from "./loginPageIcon.svg";
+import GraphSvg from "./graph.svg";
+import WalletSVG from "./wallet.svg";
+import ProfileSVG from "./profile.svg";
 
 export {
   BillsSVG,
@@ -42,4 +45,7 @@ export {
   UpArrowSVG,
   DownArrowSVG,
   LoginPageIcon,
+  GraphSvg,
+  WalletSVG,
+  ProfileSVG
 };

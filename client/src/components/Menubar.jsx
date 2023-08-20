@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { GraphSvg, HomeSVG, ProfileSVG, WalletSVG } from '../svg';
 
 function Menubar() {
     const [homeTab, sethomeTab] = useState(false);
@@ -8,7 +9,6 @@ function Menubar() {
     const [userTab, setuserTab] = useState(false); 
     
     const handleHome = event => {
-        // 👇️ toggle isActive state on click
         sethomeTab(true);
         setsignalTab(false);
         setwalletTab(false)
@@ -39,11 +39,12 @@ function Menubar() {
 
 
     return (
-    <div className="flex gap-20" style={{position: 'absolute', bottom: 0, margin: '0px 0px 0px 0px'}}>
-        <img className={homeTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleHome} src='../../public/Icons/home.png'></img>
-        <img className={signalTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleSignal} src='../../public/Icons/signal.png'></img>
-        <img className={walletTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleWallet} src='../../public/Icons/wallet.png'></img>
-        <img className={userTab ? 'menuIconSize flex activeTab' : 'menuIconSize flex'} onClick={handleUser} src='../../public/Icons/user.png'></img>
+    <div className="flex gap-4 p-1 sticky bottom-0 bg-purple-100 divide-x-2 mx-auto">
+        <img className={homeTab ? 'menuIconSize flex activeTab w-1/4 mx-auto' : 'menuIconSize flex w-1/4 mx-auto'} onClick={handleHome} src={HomeSVG}></img>
+
+        <img className={signalTab ? 'menuIconSize flex activeTab w-1/4 mx-auto' : 'menuIconSize flex w-1/4 mx-auto'} onClick={handleSignal} src={GraphSvg}></img>
+        <img className={walletTab ? 'menuIconSize flex activeTab w-1/4 mx-auto' : 'menuIconSize flex w-1/4 mx-auto'} onClick={handleWallet} src={WalletSVG}></img>
+        <img className={userTab ? 'menuIconSize flex activeTab w-1/4 mx-auto' : 'menuIconSize flex w-1/4 mx-auto'} onClick={handleUser} src={ProfileSVG}></img>
     </div>
     )
 } 
