@@ -2,16 +2,22 @@ import React, { useRef, useState } from "react";
 import { LoginPageIcon } from "../src/svg/index";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import _ from "lodash";
+import * as URLHelpers from "../src/helpers/URLHelpers";
 
 const Login = () => {
   const [form, setForm] = useState({
     name: "",
     password: "",
   });
+  const { backendURL } = URLHelpers;
 
   const formRef = useRef(null);
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formRef?.current;
 
@@ -27,6 +33,15 @@ const Login = () => {
         [password.name]: password.value,
       };
     });
+    try {
+      const { data } = await axios.post(
+        `${backendURL}/login`,
+        !_.isEmpty(form) && form
+      );
+      data && navigate("/");
+    } catch (error) {
+      console.log(error?.message);
+    }
   };
 
   return (
