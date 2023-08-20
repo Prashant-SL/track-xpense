@@ -17,5 +17,17 @@
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
       }
+
+      .menuIconSize{
+        height: 30px;
+        width: 30px;
+        margin: 10px auto auto auto;
+      }
+
+      .activeTab{
+        /* color: red;   */
+        background-color: #dcaf69;
+        border-radius: 10%; 
+      }
     }
   }
