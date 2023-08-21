@@ -2,38 +2,55 @@ import React, { useRef, useState } from "react";
 import { LoginPageIcon } from "../src/svg/index";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import _ from "lodash";
+import * as URLHelpers from "../src/helpers/URLHelpers";
 
 const Register = () => {
   const [form, setForm] = useState({
     email: "",
-    name: "",
+    username: "",
     password: "",
   });
+  const { backendURL } = URLHelpers;
 
-  const formRef = useRef(null);
+  const formRef = useRef("");
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = formRef?.current;
+    const { username, email, password } =
+      formRef.current && formRef.current.submit();
 
-    setForm((prev) => {
+    setForm((form) => {
       return {
-        ...prev,
-        [name.name]: name.value,
+        ...form,
+        [username.name]: username.value,
       };
     });
-    setForm((prev) => {
+    setForm((form) => {
       return {
-        ...prev,
+        ...form,
         [email.name]: email.value,
       };
     });
-    setForm((prev) => {
+    setForm((form) => {
       return {
-        ...prev,
+        ...form,
         [password.name]: password.value,
       };
     });
+
+    try {
+      const { data } = await axios.post(
+        `${backendURL}/register`,
+        !_.isEmpty(form) && form
+      );
+      data && navigate("/");
+    } catch (error) {
+      console.log(error?.message);
+    }
   };
 
   return (
@@ -43,10 +60,10 @@ const Register = () => {
         <input
           //   ref={nameRef}
           type="name"
-          name="name"
-          id="name"
+          name="username"
+          id="username"
           className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
-          placeholder="Your name"
+          placeholder="Enter new username"
           required
         />
         <input
@@ -55,7 +72,7 @@ const Register = () => {
           name="email"
           id="email"
           className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
-          placeholder="Your email"
+          placeholder="Enter new email"
           required
         />
         <input
@@ -63,7 +80,7 @@ const Register = () => {
           type="password"
           name="password"
           id="password"
-          placeholder="Your password"
+          placeholder="Enter new password"
           className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
           required
         />
@@ -75,6 +92,7 @@ const Register = () => {
           <LogIn />
         </button>
       </form>
+
       <div className="border-t-2">
         <p className="mb-6 -mt-3.5 text-center">
           <span className="bg-white">
