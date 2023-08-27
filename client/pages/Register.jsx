@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { LoginPageIcon } from "../src/svg/index";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -8,46 +8,31 @@ import _ from "lodash";
 import * as URLHelpers from "../src/helpers/URLHelpers";
 
 const Register = () => {
-  const [form, setForm] = useState({
-    email: "",
-    username: "",
-    password: "",
-  });
   const { backendURL } = URLHelpers;
 
-  const formRef = useRef("");
+  const formRef = useRef(null);
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const { username, email, password } =
-      formRef.current && formRef.current.submit();
+    const formData = new FormData(formRef.current);
+    const username = formData.get("username");
+    const password = formData.get("password");
 
-    setForm((form) => {
-      return {
-        ...form,
-        [username.name]: username.value,
-      };
-    });
-    setForm((form) => {
-      return {
-        ...form,
-        [email.name]: email.value,
-      };
-    });
-    setForm((form) => {
-      return {
-        ...form,
-        [password.name]: password.value,
-      };
-    });
+    const inputData = {
+      username,
+      password,
+    };
 
     try {
-      const { data } = await axios.post(
-        `${backendURL}/register`,
-        !_.isEmpty(form) && form
+      const { data, status } = await axios.post(
+        `${backendURL}/user/register`,
+        inputData
       );
-      data && navigate("/");
+      if (status == 200 || status == 201) {
+        navigate("/login");
+      }
+      console.log("data", data);
     } catch (error) {
       console.log(error?.message);
     }
@@ -58,8 +43,6 @@ const Register = () => {
       <img src={LoginPageIcon} />
       <form className="mb-20" ref={formRef} onSubmit={handleFormSubmit}>
         <input
-          //   ref={nameRef}
-          type="name"
           name="username"
           id="username"
           className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
@@ -67,16 +50,6 @@ const Register = () => {
           required
         />
         <input
-          //   ref={emailRef}
-          type="email"
-          name="email"
-          id="email"
-          className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
-          placeholder="Enter new email"
-          required
-        />
-        <input
-          //   ref={passwordRef}
           type="password"
           name="password"
           id="password"
@@ -92,7 +65,6 @@ const Register = () => {
           <LogIn />
         </button>
       </form>
-
       <div className="border-t-2">
         <p className="mb-6 -mt-3.5 text-center">
           <span className="bg-white">

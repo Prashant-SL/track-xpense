@@ -9,7 +9,7 @@ const Dashboard = () => {
       <div className="shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-35px] bg-gradient-to-b from-transparent to-purple-50 pb-6 rounded-3xl">
         <div className="flex items-end px-4">
           <img
-            src="/public/assets/TrackXpenseLogo.png"
+            src="/assets/TrackXpenseLogo.png"
             width="40px"
             className="rounded-50 border"
           />
