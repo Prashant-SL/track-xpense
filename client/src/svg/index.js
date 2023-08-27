@@ -19,6 +19,7 @@ import CurrencySVG from "./currency.svg";
 import UpArrowSVG from "./upArrow.svg";
 import DownArrowSVG from "./downArrow.svg";
 import LoginPageIcon from "./loginPageIcon.svg";
+import NoDataIcon from "./no-data.svg";
 
 export {
   BillsSVG,
@@ -42,4 +43,5 @@ export {
   UpArrowSVG,
   DownArrowSVG,
   LoginPageIcon,
+  NoDataIcon,
 };

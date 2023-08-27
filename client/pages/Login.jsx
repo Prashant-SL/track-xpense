@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import { LoginPageIcon } from "../src/svg/index";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -8,10 +8,6 @@ import _ from "lodash";
 import * as URLHelpers from "../src/helpers/URLHelpers";
 
 const Login = () => {
-  const [form, setForm] = useState({
-    name: "",
-    password: "",
-  });
   const { backendURL } = URLHelpers;
 
   const formRef = useRef(null);
@@ -19,26 +15,26 @@ const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formRef?.current;
 
-    setForm((form) => {
-      return {
-        ...form,
-        [email.name]: email.value,
-      };
-    });
-    setForm((form) => {
-      return {
-        ...form,
-        [password.name]: password.value,
-      };
-    });
+    const formData = new FormData(formRef.current);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    const inputData = {
+      username,
+      password,
+    };
+
     try {
-      const { data } = await axios.post(
-        `${backendURL}/login`,
-        !_.isEmpty(form) && form
+      const { data, status } = await axios.post(
+        `${backendURL}/user/login`,
+        inputData
       );
-      data && navigate("/");
+      if (status == 200 || status == 201) {
+        localStorage.setItem("token", data?.token);
+        localStorage.setItem("userId", data?.userId);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error?.message);
     }
@@ -49,9 +45,9 @@ const Login = () => {
       <img src={LoginPageIcon} />
       <form className="mb-20" ref={formRef} onSubmit={handleFormSubmit}>
         <input
-          type="email"
-          name="email"
-          id="email"
+          type="username"
+          name="username"
+          id="username"
           className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
           placeholder="Your email"
           required
@@ -79,7 +75,7 @@ const Login = () => {
       <div className="border-t-2">
         <p className="mb-6 -mt-3.5 text-center">
           <span className="bg-white">
-            &nbsp;&nbsp;Don't have account? Register&nbsp;&nbsp;
+            &nbsp;&nbsp;Don&apos;t have account? Register&nbsp;&nbsp;
           </span>
         </p>
         <Link to="/register">
