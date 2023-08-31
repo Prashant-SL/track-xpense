@@ -11,11 +11,12 @@ import {
   OtherSVG,
   PhoneSVG,
   TravelSVG,
-  InterestSVG,
+  IntrestSVG,
   InvestmentSVG,
   ComputerSVG,
   SalarySVG,
   BusinessSVG,
+  ShoppingCartSVG,
 } from "../src/svg/index";
 
 const incomeCategory = [
@@ -25,7 +26,7 @@ const incomeCategory = [
   },
   {
     label: "Bank Interest",
-    img: InterestSVG,
+    img: IntrestSVG,
   },
   {
     label: "Investment",
@@ -90,6 +91,10 @@ const expenseCategory = [
   {
     label: "Travel",
     img: TravelSVG,
+  },
+  {
+    label: "Shopping",
+    img: ShoppingCartSVG,
   },
   {
     label: "Other",

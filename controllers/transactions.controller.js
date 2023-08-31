@@ -2,7 +2,7 @@ const Transactions = require("../models/transactions.model");
 
 // Add new transaction
 const addtransaction = async (req, res) => {
-  const { amount, category, description, date, user, type } = req.body;
+  const { amount, category, description, date, type } = req.body;
 
   try {
     const transactions = new Transactions({
@@ -14,9 +14,8 @@ const addtransaction = async (req, res) => {
       user: req.userId,
     });
     transactions.save();
-    res.status(201).json({ message: "Transaction added successfully" });
+    res.status(201).json({ message: `${type} added successfully` });
   } catch (error) {
-    // console.log("error", error);
     res.status(500).json({ message: "An error occurred" });
   }
 };
@@ -24,12 +23,45 @@ const addtransaction = async (req, res) => {
 // Get all transaction list
 const getTransactions = async (req, res) => {
   try {
-    const transactions = await Transactions.find({
-      user: req.userId,
+    const transactions = await Transactions.find({ user: req.userId }).sort({
+      date: -1,
     });
     res.status(200).json(transactions);
   } catch (error) {
     res.status(500).json({ message: "An error occurred" });
+  }
+};
+
+// Get available balance
+const getBalance = async (req, res) => {
+  try {
+    const transactions = await Transactions.find({ user: req.userId }).sort({
+      date: -1,
+    });
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let lastIncome = 0;
+    let lastExpense = 0;
+
+    transactions.find((transaction) => {
+      if (transaction.type === "income") lastIncome = transaction.amount;
+      else lastExpense = transaction.amount;
+    });
+
+    transactions.forEach((transaction) => {
+      if (transaction.type === "income") {
+        totalIncome += Number(transaction.amount);
+      } else if (transaction.type === "expense") {
+        totalExpense += Number(transaction.amount);
+      }
+    });
+    const availableBalance = totalIncome - totalExpense;
+
+    res
+      .status(200)
+      .json({ balance: availableBalance, lastIncome, lastExpense });
+  } catch (error) {
+    res.status(500).json({ error: "Error calculating balance" });
   }
 };
 
@@ -41,7 +73,7 @@ const updateTransaction = async (req, res) => {
   try {
     const updatedTransaction = await Transactions.findOneAndUpdate(
       { _id: transactionId, user: userId },
-      req.body, // Updated transaction data
+      { ...req.body, date: new Date() }, // Updated transaction data
       { new: true } // Return the updated document
     );
 
@@ -53,7 +85,6 @@ const updateTransaction = async (req, res) => {
 
     res.status(200).json(updatedTransaction);
   } catch (error) {
-    console.log("error", error);
     res.status(500).json({ message: "An error occurred" });
   }
 };
@@ -64,18 +95,17 @@ const deleteTransaction = async (req, res) => {
   const transactionId = req.params.id; // Extract transaction ID from request parameters
 
   try {
-    const transaction = await Transactions.findOneAndDelete({
+    const transactions = await Transactions.findOneAndDelete({
       _id: transactionId,
       user: userId,
     });
 
-    if (!transaction) {
+    if (!transactions) {
       return res
         .status(404)
         .json({ message: "Transaction not found or unauthorized" });
     }
-
-    res.status(200).json({ message: "Transaction deleted successfully" });
+    res.status(200).send(transactions);
   } catch (error) {
     res.status(500).json({ message: "An error occurred" });
   }
@@ -84,6 +114,7 @@ const deleteTransaction = async (req, res) => {
 module.exports = {
   addtransaction,
   getTransactions,
+  getBalance,
   updateTransaction,
   deleteTransaction,
 };

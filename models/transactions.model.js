@@ -8,7 +8,7 @@ const transactionsSchema = new mongoose.Schema(
       required: [true, "Type is required"],
     },
     amount: {
-      type: String,
+      type: Number,
       required: [true, "Amount is required"],
     },
     category: {

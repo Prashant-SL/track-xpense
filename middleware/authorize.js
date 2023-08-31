@@ -8,7 +8,7 @@ const generateToken = (userId) => {
     userId,
   };
 
-  return jwt.sign(payload, secretKey, { expiresIn: "12h" }); // Token expires in 1 hour
+  return jwt.sign(payload, secretKey, { expiresIn: "24h" }); // Token expires after 24 hours
 };
 
 // Middleware for JWT authorization
@@ -24,7 +24,7 @@ const authorize = (req, res, next) => {
     req.userId = decoded.userId; // Attaching user ID to the request
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).send(error.message || error.name);
   }
 };
 

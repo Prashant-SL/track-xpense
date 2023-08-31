@@ -9,9 +9,9 @@ const register = async (req, res) => {
 
   const user = await Users.findOne({ username }); // checking if user already exists or not
   if (user) {
-    return res
-      .status(401)
-      .json({ message: "Username already exists, please login" });
+    return res.status(401).json({
+      message: "Username already exists. Choose new username or login",
+    });
   }
 
   try {
@@ -27,8 +27,7 @@ const register = async (req, res) => {
       userId: user.id,
     });
   } catch (error) {
-    console.log("error", error);
-    res.status(500).json({ message: "An error occurred" });
+    res.status(500).send(error.message);
   }
 };
 
@@ -42,18 +41,22 @@ const login = async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .json({ message: "Invalid username or User not exist" });
+        .json({ message: "Invalid username or User not exist" })
+        .send(error.message);
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid/Incorrect password" });
+      return res
+        .status(401)
+        .json({ message: "Invalid/Incorrect password" })
+        .send(error.message);
     }
 
     const token = generateToken(user.id);
-    res.status(200).json({ token, userId: user.id });
+    res.status(200).json({ token, message: "Login Successful", username });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred" });
+    res.status(500).json({ message: "An error occurred" }).send(error.message);
   }
 };
 
