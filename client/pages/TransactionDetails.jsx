@@ -8,7 +8,6 @@ import {
 import axios from "axios";
 import { backendURL } from "../src/helpers/URLHelpers";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 
 const TransactionDetails = ({ transactionType }) => {
   const { type } = transactionType;

@@ -7,7 +7,6 @@ import * as URLHelpers from "../src/helpers/URLHelpers";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { NoContentSVG } from "../src/svg/index.js";
-import Header from "../src/components/Header";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -93,7 +92,7 @@ const Dashboard = () => {
         )}
         {isLoading && <Skeleton />}
 
-        {transactionsList.length <= 4
+        {transactionsList?.length <= 4
           ? transactionsList?.map((transactionList) => (
               <TransactionList
                 transactionData={transactionList}

@@ -8,8 +8,6 @@ import axios from "axios";
 import * as URLHelpers from "../src/helpers/URLHelpers";
 
 const Register = () => {
-  const { backendURL } = URLHelpers;
-
   const formRef = useRef(null);
   const navigate = useNavigate();
 
@@ -24,7 +22,7 @@ const Register = () => {
 
     try {
       const { data, status } = await axios.post(
-        `${backendURL}/user/register`,
+        `${URLHelpers.backendURL}/user/register`,
         inputData
       );
       if (status == 200 || status == 201) {

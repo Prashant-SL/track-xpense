@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddTransaction from "../pages/AddTransaction";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";

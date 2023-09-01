@@ -14,12 +14,6 @@ connectDb();
 app.use("/api/v1/transactions", require("./routes/transaction.route"));
 app.use("/api/v1/user", require("./routes/user.route"));
 
-app.use(express.static(path.join(__dirname, "./client/dist")));
-
-app.get("*", async (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
