@@ -1,3 +1,4 @@
+import { LogIn } from "lucide-react";
 import { Toaster, toast } from "react-hot-toast";
 
 const Header = () => {
@@ -23,16 +24,19 @@ const Header = () => {
         )}
       </div>
       {isLoggedIn && (
-        <p
-          className="cursor-pointer h-9 bg-primary-50 text-xs text-purple-800 px-4 pt-2 rounded-lg"
-          onClick={() => {
-            localStorage.clear();
-            toast.success("Logged Out");
-            window.location.href = "/login";
-          }}
-        >
-          Logout
-        </p>
+        <div className="flex cursor-pointer h-9 -ml-2 bg-primary-50 px-2 items-center gap-x-2 rounded-lg">
+          <p
+            className="text-xs text-purple-800 "
+            onClick={() => {
+              localStorage.clear();
+              toast.success("Logged Out");
+              window.location.href = "/login";
+            }}
+          >
+            Logout
+          </p>
+          <LogIn className="w-4" color="#391599" />
+        </div>
       )}
       <Toaster />
     </div>

@@ -27,7 +27,7 @@ const register = async (req, res) => {
       userId: user.id,
     });
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: "An error occurred" });
   }
 };
 
@@ -41,22 +41,18 @@ const login = async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .json({ message: "Invalid username or User not exist" })
-        .send(error.message);
+        .json({ message: "Invalid username or User not exist" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res
-        .status(401)
-        .json({ message: "Invalid/Incorrect password" })
-        .send(error.message);
+      return res.status(401).json({ message: "Invalid/Incorrect password" });
     }
 
     const token = generateToken(user.id);
     res.status(200).json({ token, message: "Login Successful", username });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred" }).send(error.message);
+    res.status(500).json({ message: "An error occurred" });
   }
 };
 

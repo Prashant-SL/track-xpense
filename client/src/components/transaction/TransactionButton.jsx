@@ -38,7 +38,7 @@ const TransactionButton = ({ transactionData, lastTrasaction }) => {
 
 TransactionButton.propTypes = {
   transactionData: PropTypes.object,
-  lastTrasaction: PropTypes.string,
+  lastTrasaction: PropTypes.number || PropTypes.string,
 };
 
 export default TransactionButton;
