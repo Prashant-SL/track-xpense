@@ -1,1 +1,1 @@
-export const backendURL = "http://localhost:8888/api/v1";
+export const backendURL = "https://cute-cyan-ray-cuff.cyclic.app/api/v1";
