@@ -7,16 +7,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NoContent from "../src/components/NoContent";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const isLoggedIn = localStorage.getItem("token") ? true : false;
+  const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      if (!isLoggedIn) {
-        window.location.href("/login");
+      if (!localStorage.getItem("token")) {
+        navigate("/login");
       }
-    }, 5000);
-  }, [isLoggedIn]);
+    }, 3000);
+  }, [navigate]);
+
   const headers = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,7 +54,14 @@ const Dashboard = () => {
     isLoggedIn && fetchBalance
   );
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading)
+    return (
+      <h1>
+        Loading...
+        <br />
+        If you are not logged in, Please login.
+      </h1>
+    );
 
   return (
     <div className="mx-auto lg:mb-12 relative w-max text-center h-max">

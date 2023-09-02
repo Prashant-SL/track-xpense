@@ -10,14 +10,14 @@ const Footer = () => {
   const isLoggedIn = localStorage.getItem("token") ? true : false;
 
   return (
-    <div className="flex bottom-0 lg:bottom-6 border-collapse fixed w-max border bg-white z-10 py-1 pt-2 pb-1.5 border-t justify-around -ml-[1px] border-gray-100">
-      <Link to={"/"}>
+    <div className="flex bottom-0 lg:bottom-6 border-collapse fixed w-max bg-white z-10 py-1 pt-2 pb-1.5 border-t justify-around -ml-[1px] border-gray-100">
+      <Link to={isLoggedIn && "/"}>
         <img className="w-8" src={Home2SVG} />
       </Link>
-      <Link to={"/get-transactions"}>
+      <Link to={isLoggedIn && "/get-transactions"}>
         <img className="w-8" src={TransactionListSVG} />
       </Link>
-      <Link to={"/add-transaction"}>
+      <Link to={isLoggedIn && "/add-transaction"}>
         <img className="w-8" src={AddTransactionSVG} />
       </Link>
       <Link to={!isLoggedIn && "/login"}>
