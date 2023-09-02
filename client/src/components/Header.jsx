@@ -8,7 +8,7 @@ const Header = () => {
     localStorage.clear();
     toast.success("Logged Out");
     setTimeout(() => {
-      window.location.href = "/login";
+      window.location.href = "/";
     }, 1200);
   };
 

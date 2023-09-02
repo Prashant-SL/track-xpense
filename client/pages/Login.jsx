@@ -45,13 +45,10 @@ const Login = () => {
     }
   };
 
-  if (isLoading) return <h1 className="h-maxM lg:h-maxD">Trying to log in</h1>;
-  if (isError) return <h1 className="h-maxM lg:h-maxD">Error loggin in</h1>;
+  if (isError) return <span>Error loggin in</span>;
 
   return (
     <div className="px-4 mb-10 h-maxM lg:h-maxD">
-      {isLoading}
-      {isError}
       <img src={LoginPageIcon} />
       <p className="text-center mb-3 text-xl font-sans use font-semibold text-primary-950">
         Login your account
@@ -78,7 +75,7 @@ const Login = () => {
           type="submit"
           className="flex items-center gap-x-2 mx-auto text-white bg-primary-500 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
         >
-          Login Account
+          {isLoading ? <span>Trying to log in</span> : "Login Account"}
           <LogIn />
         </button>
       </form>

@@ -10,15 +10,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const isLoggedIn = localStorage.getItem("token") ? true : false;
+  const userToken = localStorage.getItem("token");
+  const isLoggedIn = userToken ? true : false;
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      if (!localStorage.getItem("token")) {
-        navigate("/login");
+      if (!userToken) {
+        window.location.href("/login");
       }
     }, 3000);
-  }, [navigate]);
+  }, [userToken]);
 
   const headers = {
     headers: {

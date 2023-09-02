@@ -44,15 +44,10 @@ const Register = () => {
     }
   };
 
-  if (isLoading)
-    return <h1 className="h-maxM lg:h-maxD">Trying to create new account</h1>;
-  if (isError)
-    return <h1 className="h-maxM lg:h-maxD">Error creating account</h1>;
+  if (isError) return <span>Error creating account</span>;
 
   return (
     <div className="px-4 mb-10 h-maxM lg:h-maxD">
-      {isLoading}
-      {isError}
       <img src={LoginPageIcon} />
       <p className="text-center mb-3 text-xl font-sans use font-semibold text-primary-950">
         Create new account
@@ -77,7 +72,11 @@ const Register = () => {
           type="submit"
           className="flex items-center gap-x-2 mx-auto text-white bg-primary-500 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
         >
-          Create Account
+          {isLoading ? (
+            <span>Trying to create new account</span>
+          ) : (
+            "Create Account"
+          )}
           <LogIn />
         </button>
       </form>
