@@ -59,7 +59,7 @@ const getBalance = async (req, res) => {
 
     res
       .status(200)
-      .json({ balance: availableBalance, lastIncome, lastExpense });
+      .json({ balance: availableBalance, totalIncome, totalExpense });
   } catch (error) {
     res.status(500).json({ error: "Error calculating balance" });
   }
