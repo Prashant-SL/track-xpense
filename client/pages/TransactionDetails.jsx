@@ -91,8 +91,8 @@ const TransactionDetails = ({ transactionType }) => {
         onSubmit={handleSubmit}
         className="w-11/12 mx-auto flex flex-col gap-y-3"
       >
-        <p className="text-left text-lg mt-4 text-primary-700 font-semibold">
-          Enter transaction details
+        <p className="text-left capitalize text-lg mt-4 text-primary-700 font-semibold">
+          Enter {type} details
         </p>
         <input
           name="amount"

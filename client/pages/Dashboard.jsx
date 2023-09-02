@@ -7,6 +7,7 @@ import * as URLHelpers from "../src/helpers/URLHelpers";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { NoContentSVG } from "../src/svg/index.js";
+import NoContent from "../src/components/NoContent";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -81,14 +82,7 @@ const Dashboard = () => {
             </Link>
           </div>
         ) : (
-          <>
-            <img src={NoContentSVG} />
-            <p className="px-6 text-gray-400 text-lg">
-              You have not made any transactions.
-              <br />
-              Please make new transactions.
-            </p>
-          </>
+          <NoContent />
         )}
         {isLoading && <Skeleton />}
 
@@ -100,7 +94,7 @@ const Dashboard = () => {
               />
             ))
           : transactionsList
-              .slice(0, 4)
+              ?.slice(0, 4)
               ?.map((transactionList) => (
                 <TransactionList
                   transactionData={transactionList}

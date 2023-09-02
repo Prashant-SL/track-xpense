@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as URLHelpers from "../src/helpers/URLHelpers";
 import axios from "axios";
 import TransactionList from "../src/components/transaction/TransactionList";
-import { NoContentSVG } from "../src/svg";
+import NoContent from "../src/components/NoContent";
 
 const GetTransactions = () => {
   const [filterValue, setFilterValue] = useState("");
@@ -33,14 +33,9 @@ const GetTransactions = () => {
   return (
     <>
       {allTransactions.length == 0 ? (
-        <>
-          <img src={NoContentSVG} />
-          <p className="px-6 text-gray-400 text-center text-lg">
-            No transactions available to show.
-            <br />
-            Please make new transactions.
-          </p>
-        </>
+        <div className="text-center">
+          <NoContent />
+        </div>
       ) : (
         <>
           <p className="text-primary-600 text-xl px-5 font-semibold my-4">

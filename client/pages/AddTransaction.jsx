@@ -7,18 +7,18 @@ const AddTransaction = () => {
   return (
     <div className="relative h-full">
       <img src={BankIcon} className="px-12 mt-2" />
-      <p className="text-2xl pl-4 text-primary-600 font-semibold my-2 leading-8">
+      <p className="text-2xl capitalize pl-4 text-primary-600 font-semibold my-2 leading-8">
         What kind of <br />
         transaction is this?
       </p>
       <div className="flex w-full justify-around">
         <TransactionButton
           // onClick={onClick}
-          transactionData={{ type: "income", width: "medium" }}
+          transactionData={{ type: "income" }}
         />
         <TransactionButton
           // onClick={onClick}
-          transactionData={{ type: "expense", width: "medium" }}
+          transactionData={{ type: "expense" }}
         />
       </div>
       <Link to="/">
