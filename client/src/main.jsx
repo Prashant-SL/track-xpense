@@ -13,10 +13,10 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 const queryClient = new QueryClient();
-
+const isLoggedIn = localStorage.getItem("token") ? true : false;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <div className="w-max overflow-scroll no-scrollbar scroll-smooth border mx-auto">
+    <div className="w-max relative overflow-scroll no-scrollbar scroll-smooth lg:border mx-auto mb-10">
       <QueryClientProvider client={queryClient}>
         <Header />
         <Router>

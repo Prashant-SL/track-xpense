@@ -6,38 +6,53 @@ import { useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import * as URLHelpers from "../src/helpers/URLHelpers";
+import { useMutation } from "react-query";
 
 const Register = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
 
+  const loginUser = async (newTransaction) => {
+    const { data, status } = await axios.post(
+      `${URLHelpers.backendURL}/user/register`,
+      newTransaction
+    );
+    if (status == 200 || status == 201) {
+      localStorage.setItem("token", data?.token);
+      localStorage.setItem("username", data?.username);
+      toast.success(data.message);
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
+    }
+    return data;
+  };
+
+  const { mutate, isLoading, isError } = useMutation(loginUser);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
-
     const inputData = {
       username: formData.get("username"),
       password: formData.get("password"),
     };
-
     try {
-      const { data, status } = await axios.post(
-        `${URLHelpers.backendURL}/user/register`,
-        inputData
-      );
-      if (status == 200 || status == 201) {
-        toast.success(data.message);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2500);
-      }
+      await mutate(inputData);
     } catch (error) {
-      toast.error(error?.message);
+      console.log(error);
     }
   };
 
+  if (isLoading)
+    return <h1 className="h-maxM lg:h-maxD">Trying to create new account</h1>;
+  if (isError)
+    return <h1 className="h-maxM lg:h-maxD">Error creating account</h1>;
+
   return (
-    <div className="px-4">
+    <div className="px-4 mb-10 h-maxM lg:h-maxD">
+      {isLoading}
+      {isError}
       <img src={LoginPageIcon} />
       <p className="text-center mb-3 text-xl font-sans use font-semibold text-primary-950">
         Create new account
@@ -60,7 +75,7 @@ const Register = () => {
         />
         <button
           type="submit"
-          className="flex items-center gap-x-2 mx-auto text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
+          className="flex items-center gap-x-2 mx-auto text-white bg-primary-500 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
         >
           Create Account
           <LogIn />
@@ -74,7 +89,7 @@ const Register = () => {
         </p>
         <Link
           to="/login"
-          className="flex items-center gap-x-2 mx-auto text-white bg-primary-500 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
+          className="flex items-center gap-x-2 mx-auto text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm w-full justify-center px-5 py-2.5 text-center"
         >
           Login Account
           <LogIn />

@@ -6,12 +6,30 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import * as URLHelpers from "../src/helpers/URLHelpers";
+import { useMutation } from "react-query";
 
 const Login = () => {
   const { backendURL } = URLHelpers;
-
   const formRef = useRef(null);
   const navigate = useNavigate();
+
+  const loginUser = async (newTransaction) => {
+    const { data, status } = await axios.post(
+      `${backendURL}/user/login`,
+      newTransaction
+    );
+    if (status == 200 || status == 201) {
+      localStorage.setItem("token", data?.token);
+      localStorage.setItem("username", data?.username);
+      toast.success(data.message);
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
+    }
+    return data;
+  };
+
+  const { mutate, isLoading, isError } = useMutation(loginUser);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -20,27 +38,20 @@ const Login = () => {
       username: formData.get("username"),
       password: formData.get("password"),
     };
-
     try {
-      const { data, status } = await axios.post(
-        `${backendURL}/user/login`,
-        inputData
-      );
-      if (status == 200 || status == 201) {
-        localStorage.setItem("token", data?.token);
-        localStorage.setItem("username", data?.username);
-        toast.success(data.message);
-        setTimeout(() => {
-          navigate("/");
-        }, 2500);
-      }
+      await mutate(inputData);
     } catch (error) {
-      toast.error(error?.message);
+      console.log(error);
     }
   };
 
+  if (isLoading) return <h1 className="h-maxM lg:h-maxD">Trying to log in</h1>;
+  if (isError) return <h1 className="h-maxM lg:h-maxD">Error loggin in</h1>;
+
   return (
-    <div className="px-4">
+    <div className="px-4 mb-10 h-maxM lg:h-maxD">
+      {isLoading}
+      {isError}
       <img src={LoginPageIcon} />
       <p className="text-center mb-3 text-xl font-sans use font-semibold text-primary-950">
         Login your account
@@ -54,16 +65,14 @@ const Login = () => {
           placeholder="Your email"
           required
         />
-        <div className="flex ">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Your password"
-            className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
-            required
-          />
-        </div>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Your password"
+          className="mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-900 focus:border-primary-900 w-full p-2.5"
+          required
+        />
 
         <button
           type="submit"

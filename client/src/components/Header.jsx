@@ -7,12 +7,17 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.clear();
     toast.success("Logged Out");
-    window.location.href = "/login";
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 1200);
   };
 
   return (
-    <div className="flex sticky mt-4 items-center">
-      <div className="flex items-center px-4 w-4/5 ">
+    <div className="flex bg-white mt-4 z-10 items-center">
+      <div
+        className="flex items-center px-4 w-4/5"
+        onClick={() => (window.location.href = "/")}
+      >
         <img
           src="/assets/TrackXpenseLogo.png"
           width="40px"
@@ -30,10 +35,11 @@ const Header = () => {
         )}
       </div>
       {isLoggedIn && (
-        <div className="flex cursor-pointer h-9 -ml-2 bg-primary-50 px-2 items-center gap-x-2 rounded-lg">
-          <p className="text-xs text-purple-800 " onClick={handleLogout}>
-            Logout
-          </p>
+        <div
+          onClick={handleLogout}
+          className="flex cursor-pointer h-9 -ml-4 bg-primary-50 px-2 items-center gap-x-2 rounded-lg"
+        >
+          <p className="text-xs text-purple-800">Logout</p>
           <LogIn className="w-4" color="#391599" />
         </div>
       )}
