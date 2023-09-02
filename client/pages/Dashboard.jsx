@@ -33,8 +33,8 @@ const Dashboard = () => {
       `${URLHelpers.backendURL}/transactions/get-balance`,
       headers
     );
-    const { balance, lastIncome, lastExpense } = data;
-    return { balance, lastIncome, lastExpense };
+    const { balance, totalIncome, totalExpense } = data;
+    return { balance, totalIncome, totalExpense };
   };
 
   const { data: availableBalance } = useQuery("availableBalance", fetchBalance);
