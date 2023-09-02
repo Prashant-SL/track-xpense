@@ -8,11 +8,12 @@ export default {
   theme: {
     extend: {
       width: {
-        max: "390px",
+        max: "360px",
         "95p": "95%",
       },
       height: {
-        max: "800px",
+        maxD: "800px",
+        maxM: "700px",
       },
       colors: {
         primary: {

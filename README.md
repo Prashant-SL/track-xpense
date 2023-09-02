@@ -1,3 +1,4 @@
 Track Xpense Web App
 
-This is built with the design inspiration from this free <a href="https://www.figma.com/file/zC7UBobrxKKL32sDU9eKZZ/Income-%26-Expense-Manager-(Community)?type=design&node-id=2-18&mode=design">figma design</a>
+This is MERN stack expense tracker web application. This is a mobile view application.
+Tech stack:- Vite/ReactJS, ExpressJS, MongoDB, JavaScript, Tailwind CSS and the help of ChatGPT.

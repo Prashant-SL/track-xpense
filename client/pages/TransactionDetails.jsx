@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { backendURL } from "../src/helpers/URLHelpers";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const TransactionDetails = ({ transactionType }) => {
   const { type } = transactionType;
@@ -138,12 +139,20 @@ const TransactionDetails = ({ transactionType }) => {
           }
           className="border w-full p-2 rounded-md"
         />
-        <button
-          type="submit"
-          className="flex gap-x-2 text-white w-full bg-primary-500 hover:bg-primary-800 font-medium rounded-lg text-sm justify-center px-5 py-2.5 text-center"
-        >
-          Submit
-        </button>
+        <div className="flex">
+          <button
+            type="submit"
+            className="flex py-2 h-10 px-2 text-white w-1/2 items-center bg-primary-500 font-medium rounded-lg text-sm justify-center pt-1 text-center"
+          >
+            Submit
+          </button>
+          <Link
+            to="/"
+            className="w-1/2 ml-4 py-2 px-2 flex items-center text-white bg-primary-800 font-medium rounded-lg text-sm justify-center pt-1 text-center"
+          >
+            Cancel
+          </Link>
+        </div>
         <Toaster />
       </form>
     </>

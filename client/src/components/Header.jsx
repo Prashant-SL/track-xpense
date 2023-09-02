@@ -4,8 +4,14 @@ import { Toaster, toast } from "react-hot-toast";
 const Header = () => {
   const isLoggedIn = localStorage.getItem("token") ? true : false;
 
+  const handleLogout = () => {
+    localStorage.clear();
+    toast.success("Logged Out");
+    window.location.href = "/login";
+  };
+
   return (
-    <div className="flex mt-4 items-center">
+    <div className="flex sticky mt-4 items-center">
       <div className="flex items-center px-4 w-4/5 ">
         <img
           src="/assets/TrackXpenseLogo.png"
@@ -25,14 +31,7 @@ const Header = () => {
       </div>
       {isLoggedIn && (
         <div className="flex cursor-pointer h-9 -ml-2 bg-primary-50 px-2 items-center gap-x-2 rounded-lg">
-          <p
-            className="text-xs text-purple-800 "
-            onClick={() => {
-              localStorage.clear();
-              toast.success("Logged Out");
-              window.location.href = "/login";
-            }}
-          >
+          <p className="text-xs text-purple-800 " onClick={handleLogout}>
             Logout
           </p>
           <LogIn className="w-4" color="#391599" />
