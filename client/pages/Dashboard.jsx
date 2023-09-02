@@ -64,7 +64,7 @@ const Dashboard = () => {
     );
 
   return (
-    <div className="mx-auto lg:mb-12 relative w-max text-center h-max">
+    <div className="mx-auto lg:mb-12 relative w-max text-center min-h-maxM lg:min-h-maxD">
       {isLoading}
       <div className="shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-35px] bg-gradient-to-b from-transparent to-purple-50 sticky z-0 pb-6 rounded-3xl">
         <div className="mt-4 leading-[50px]">

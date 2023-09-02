@@ -15,6 +15,10 @@ export default {
         maxD: "800px",
         maxM: "700px",
       },
+      minHeight: {
+        maxD: "800px",
+        maxM: "700px",
+      },
       colors: {
         primary: {
           50: "#fbf5ff",
