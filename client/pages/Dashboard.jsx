@@ -7,17 +7,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NoContent from "../src/components/NoContent";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const userToken = localStorage.getItem("token");
   const isLoggedIn = userToken ? true : false;
-
+  const navigate = useNavigate();
   useEffect(() => {
-    const userToken = localStorage.getItem("token");
-    if (!userToken) {
-      window.location.href = "/login";
-    }
-  }, []);
+    setTimeout(() => {
+      if (!userToken) {
+        window.location.href("/login");
+      }
+    }, 3000);
+  }, [userToken]);
 
   const headers = {
     headers: {

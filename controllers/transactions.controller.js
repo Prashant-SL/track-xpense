@@ -38,11 +38,10 @@ const getBalance = async (req, res) => {
     const transactions = await Transactions.find({ user: req.userId }).sort({
       date: -1,
     });
-
-    let totalIncome,
-      totalExpense,
-      lastIncome,
-      lastExpense = 0;
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let lastIncome = 0;
+    let lastExpense = 0;
 
     transactions.find((transaction) => {
       if (transaction.type === "income") lastIncome = transaction.amount;

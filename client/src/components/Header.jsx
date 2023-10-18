@@ -1,15 +1,8 @@
 import { LogIn } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
 const Header = () => {
-  const [loggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("token") ? true : false;
-    console.log("isL", isLoggedIn);
-    setIsLoggedIn(isLoggedIn);
-  }, []);
+  const isLoggedIn = localStorage.getItem("token") ? true : false;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -30,7 +23,7 @@ const Header = () => {
           width="40px"
           className="rounded-50 border"
         />
-        {loggedIn ? (
+        {isLoggedIn ? (
           <h2 className="text-left ml-3">
             Welcome!&nbsp;
             <p className="text-primary-600 first-letter:capitalize">
@@ -41,7 +34,7 @@ const Header = () => {
           <p className="ml-2 -mt-1 text-primary-900">Track Xpense</p>
         )}
       </div>
-      {loggedIn && (
+      {isLoggedIn && (
         <div
           onClick={handleLogout}
           className="flex cursor-pointer h-9 -ml-4 bg-primary-50 px-2 items-center gap-x-2 rounded-lg"

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { LoginPageIcon } from "../src/svg/index";
 import { LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import * as URLHelpers from "../src/helpers/URLHelpers";
@@ -22,7 +22,9 @@ const Login = () => {
       localStorage.setItem("token", data?.token);
       localStorage.setItem("username", data?.username);
       toast.success(data.message);
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     }
     return data;
   };
