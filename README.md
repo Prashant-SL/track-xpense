@@ -1,6 +1,7 @@
 # Track Xpense
 
-It is a expense tracking app for day-to-day usage. User particular data is shown. It is built using Vite(React) for the frontend and ExpressJS handles backend while talking with MongoDB. It is a mobile only-view web app. I designed the app as per my knowledge.
+It is a expense tracking app for day-to-day usage. User particular data is shown. It is built using Vite(React) for the frontend and ExpressJS handles backend while talking with MongoDB.
+It is a <b>mobile only-view</b> web app. I designed the app as per my knowledge.
 
 ## Live link
 
