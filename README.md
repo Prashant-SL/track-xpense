@@ -60,3 +60,5 @@ npm run dev
 - Signup/Login Authentication
 
 ## Screenshots
+
+![trackxpense](https://github.com/Prashant-SL/track-xpense/assets/95927107/c7d7bdf9-00c6-4f97-9f85-5d8c67880084)
